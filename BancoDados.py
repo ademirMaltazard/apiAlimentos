@@ -34,6 +34,37 @@ class BancoDeDados:
             "statusCode": 200
         }
 
+    def putAlimento(self, alimento: Alimento):
+        chaves = self.dados.keys()
+        for chave in chaves:
+            if chave == alimento.id:
+                self.dados[alimento.id] = alimento
+                return {
+                    "dados": alimento,
+                    "mensagem": "Atualizado com sucesso!",
+                    "statusCode": 406
+                }
+        return {
+            "message": "A id não existe no banco de dados",
+            "statusCode": 200
+        }
+
+    def deleteAlimento(self, id):
+        chaves = self.dados.keys()
+        for chave in chaves:
+            if chave == id:
+                alimentoExcluido = self.dados[id]
+                del self.dados[id]
+                return {
+                    "Dado": alimentoExcluido,
+                    "message": "Alimento excluido com sucesso",
+                    "statusCode": 200
+                }
+        return {
+            "dados": "O id informado não existe no banco de dados",
+            "statusCode": 404
+        }
+
     # Adicionar um novo alimento
     def AdicionarAlimento(self, alimento: Alimento):
         self.dados[alimento.id] = alimento
