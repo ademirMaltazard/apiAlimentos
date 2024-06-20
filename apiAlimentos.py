@@ -6,11 +6,8 @@ app = FastAPI()
 
 @app.get("/alimentos/")
 def BuscarTodosAlimentos():
-    resposta = bd.getAlimentos()
-    return {
-        "message": resposta,
-        "statusCode": 200
-    }
+    return bd.getAlimentos()
+
 
 @app.get("/alimentos/{id}")
 def BuscarUmAlimento(id: int):
@@ -27,3 +24,7 @@ def AtualizarAlimento(alimento: ModelAlimento):
 @app.delete("/alimentos/delete/{id}")
 def DeletarUmAlimento(id: int):
     return bd.deleteAlimento(id)
+
+@app.put("alimentos/atualizar/")
+def AtualizarAlimento(alimento: ModelAlimento):
+    return bd.putAlimento(alimento)
